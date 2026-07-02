@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Warmstreak';
+  src: url('/fonts/Warmstreak Personal Use.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Running Sundays';
+  src: url('/fonts/Running Sundays.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-warmstreak: "Warmstreak", sans-serif;
+  --font-running: "Running Sundays", sans-serif;
+}
+
+@layer base {
+  :root {
+    --color-primary-dark: #052c1e;
+    --color-primary-green: #0f5132;
+    --color-accent-lime: #a3e635;
+    --color-accent-lime-hover: #84cc16;
+    
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+
+  body {
+    background-color: #f8fafc;
+    color: #0f172a;
+    min-height: 100vh;
+  }
+}
+
+/* Custom Glassmorphism Card styling */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* Custom Pitch Grid background */
+.pitch-bg {
+  background-color: #052c1e;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(163, 230, 53, 0.15) 0%, transparent 60%),
+    linear-gradient(rgba(15, 81, 50, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 81, 50, 0.4) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+}
+
+/* Custom pulse animations */
+@keyframes pulse-lime {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.03);
+  }
+}
+
+.animate-pulse-lime {
+  animation: pulse-lime 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Faded background texture container styles */
+.faded-bg-courses,
+.faded-bg-dashboard,
+.faded-bg-certificates {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Make sure all child content sits on top of background */
+.faded-bg-courses > *,
+.faded-bg-dashboard > *,
+.faded-bg-certificates > * {
+  position: relative;
+  z-index: 10;
+}
+
+.faded-bg-courses::before,
+.faded-bg-dashboard::before,
+.faded-bg-certificates::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.10; /* 12% opacity texture */
+  z-index: 0;
+  pointer-events: none;
+  /* Blend texture smoothly into background without hard edges */
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.faded-bg-courses::before {
+  background-image: url('./assets/images/match1.jpg');
+}
+
+.faded-bg-dashboard::before {
+  background-image: url('./assets/images/match2.jpg');
+}
+
+.faded-bg-certificates::before {
+  background-image: url('./assets/images/match3.jpg');
+}
+
